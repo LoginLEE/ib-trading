@@ -168,14 +168,20 @@ class DownloadApp(EClient, ibapi.wrapper.EWrapper):
             return _ts
 
         tokens = ts.split()
-        if len(tokens) == 1:
-            ts = _try_formats(ts)
-            tz = pytz.timezone(self.args.timezone)
-            ts = tz.localize(ts)
-        else:
-            ts = _try_formats(" ".join(tokens[:-1]))
-            tz = pytz.timezone(tokens[-1])
-            ts = tz.localize(ts)
+        
+        ts = _try_formats(ts)
+        tz = pytz.timezone(self.args.timezone)
+        ts = tz.localize(ts)
+        
+        # if len(tokens) == 1:
+        #     ts = _try_formats(ts)
+        #     tz = pytz.timezone(self.args.timezone)
+        #     ts = tz.localize(ts)
+        # else:
+        #     ts = _try_formats(" ".join(tokens[:-1]))
+        #     tz = pytz.timezone(tokens[-1])
+        #     ts = tz.localize(ts)
+            
         return ts
 
     @iswrapper
